@@ -24,7 +24,6 @@ export class AppComponent {
     itemDeleted(adjectiveId:number) {
         let index = this.selectedAdjectives.indexOf(adjectiveId);
         this.selectedAdjectives.splice(index, 1);
-        console.log('after delete: ', this.selectedAdjectives);
     }
 }
 
