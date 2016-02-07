@@ -2,14 +2,13 @@ import {Injectable} from 'angular2/core';
 
 @Injectable()
 export class ScoringService {
-    private score:number;
+    private _score:number = 0;
 
-
-    addScoresForAdjective(adj:string):number {
-        return ++this.score;
+    addPointsForAdjective(adjectiveId:number):number {
+        return ++this._score;
     }
 
-    subScoresForAdjective(adj:string):number {
-        return --this.score;
+    subPointsForAdjective(adjectiveId:number):number {
+        return --this._score;
     }
 }
