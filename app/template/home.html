@@ -1,4 +1,9 @@
-<h2>Select adjectives</h2> <!-- TODO: angular2-translate -->
-<select name="adjectiveSelect">
-    <option *ngFor="#adj of adjectives" value="adj.id">{{ adj.name }}</option>
-</select>
+<div class="container">
+    <h2>Angular2 adjectives</h2>
+
+    <div class="row col-xs-6">
+        <select select2 class="form-control" name="adjectiveSelect" multiple="multiple" [placeholder]="'Wybierz przymiotniki'">
+            <option *ngFor="#adj of adjectives" value="adj.id">{{ adj.name }}</option>
+        </select>
+    </div>
+</div>
