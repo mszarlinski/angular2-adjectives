@@ -3,11 +3,12 @@ import {Directive,  ElementRef, Input, Output, EventEmitter} from 'angular2/core
 declare var $:any;
 
 @Directive({
-    selector: '[select2]'
+    selector: '[select2]',
+    properties: ['placeholder']
 })
 export class Select2 {
 
-    @Input() private placeholder:string;
+    private placeholder:string;
     @Output() selected = new EventEmitter<number>();
     @Output() deleted = new EventEmitter<number>();
 
