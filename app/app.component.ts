@@ -11,11 +11,20 @@ import {Select2} from './select2.directive';
 })
 export class AppComponent {
 
-    public selectedAdjectives:Adjective[] = [];
+    public selectedAdjectives:number[] = [];
     public adjectives:Adjective[] = ADJECTIVES;
 
     constructor(private _scoringService:ScoringService) {
+    }
 
+    itemSelected(adjectiveId:number) {
+        this.selectedAdjectives.push(adjectiveId);
+    }
+
+    itemDeleted(adjectiveId:number) {
+        let index = this.selectedAdjectives.indexOf(adjectiveId);
+        this.selectedAdjectives.splice(index, 1);
+        console.log('after delete: ', this.selectedAdjectives);
     }
 }
 
