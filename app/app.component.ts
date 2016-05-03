@@ -14,7 +14,7 @@ export class AppComponent {
     public selectedAdjectives:number[] = [];
     public adjectives:Adjective[] = ADJECTIVES;
 
-    public totalScore:number = 0;
+    public score:Score;
 
     constructor(private _scoringService:ScoringService) {
     }
@@ -22,14 +22,14 @@ export class AppComponent {
     itemSelected(adjectiveId:number) {
         this.selectedAdjectives.push(adjectiveId);
 
-        this.totalScore = this._scoringService.addPointsForAdjective(adjectiveId);
+        this.score = this._scoringService.addPointsForAdjective(adjectiveId);
     }
 
     itemDeleted(adjectiveId:number) {
         let index = this.selectedAdjectives.indexOf(adjectiveId);
         this.selectedAdjectives.splice(index, 1);
 
-        this.totalScore = this._scoringService.subPointsForAdjective(adjectiveId);
+        this.score = this._scoringService.subPointsForAdjective(adjectiveId);
     }
 }
 
