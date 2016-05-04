@@ -1,4 +1,4 @@
-import {Directive,  ElementRef, Input, Output, EventEmitter} from 'angular2/core';
+import {Directive,  ElementRef, Output, EventEmitter} from 'angular2/core';
 
 declare var $:any;
 
@@ -20,9 +20,9 @@ export class Select2 {
 
         $(this.el.nativeElement).select2({
             placeholder: this.placeholder
-        }).on('select2:select', function (event) {
+        }).on('select2:select', function (event:any) {
             self.selected.emit(event.params.data.id);
-        }).on('select2:unselect', function (event) {
+        }).on('select2:unselect', function (event:any) {
             self.deleted.emit(event.params.data.id);
         });
     }
