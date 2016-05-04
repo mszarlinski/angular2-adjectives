@@ -7,6 +7,7 @@
                     multiple="multiple" [placeholder]="'Wybierz przymiotniki'"
                     (selected)="itemSelected($event)"
                     (deleted)="itemDeleted($event)">
+                <!-- could use async filter -->
                 <option *ngFor="#adj of adjectives" value="{{ adj.id }}">{{ adj.name }}</option>
             </select>
         </div>
@@ -14,8 +15,7 @@
     <div class="row">
         <div class="col-xs-2"></div>
         <div class="col-xs-2">
-            {{ score }}
-            <div scoring-table="score"></div>
+            <div score-table [score]="score" [scales]="scales"></div>
         </div>
         <div class="col-xs-8"></div>
     </div>

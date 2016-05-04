@@ -2,6 +2,7 @@ import {Directive,  ElementRef, Output, EventEmitter} from 'angular2/core';
 
 declare var $:any;
 
+//TODO: limit selectable items after selection
 @Directive({
     selector: '[select2]',
     properties: ['placeholder']
