@@ -6,12 +6,13 @@ import {Score} from "./../domain/score";
 @Injectable()
 export class ScoringService {
     private _score:Score;
+    private _scales:Array<Scale>;
 
     constructor(private http:Http) {
         http.get('app/config/scales.json')
             .subscribe(config => {
-                let scales = config.json().scales;
-                this._score = new Score(scales);
+                this._scales = config.json().scales;
+                this._score = new Score(this._scales);
             });
     }
     
@@ -20,14 +21,14 @@ export class ScoringService {
     }
 
     addPointsForAdjective(adjectiveId:number):Score {
-        this._score.scales.forEach(scale => {
+        this._scales.forEach(scale => {
             this.handleAdjective(scale, adjectiveId);
         });
         return this._score;
     }
 
     subPointsForAdjective(adjectiveId:number):Score {
-        this._score.scales.forEach(scale => {
+        this._scales.forEach(scale => {
             this.handleAdjective(scale, adjectiveId, -1);
         });
         return this._score;

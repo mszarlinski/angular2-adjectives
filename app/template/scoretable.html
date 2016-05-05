@@ -1,7 +1,11 @@
 <div class="panel panel-default">
-    <ul>
-        <li *ngFor="#scale of score.scales">
-            {{ score.scoreNames[scale] }}-{{ score.scorePoints[scale] }}
-        </li>
-    </ul>
+    <div class="panel-heading"><strong>Scores</strong></div>
+    <div class="panel-body" *ngIf="score">
+        <table class="table">
+            <tr *ngFor="#scale of score.scaleIds">
+                <td>{{ score.scaleNames[scale] }}</td>
+                <td><strong>{{ score.scalePoints[scale] }}</strong></td>
+            </tr>
+        </table>
+    </div>
 </div>

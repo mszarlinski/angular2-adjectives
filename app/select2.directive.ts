@@ -22,9 +22,9 @@ export class Select2 {
         $(this.el.nativeElement).select2({
             placeholder: this.placeholder
         }).on('select2:select', function (event:any) {
-            self.selected.emit(event.params.data.id);
+            self.selected.emit(+event.params.data.id);
         }).on('select2:unselect', function (event:any) {
-            self.deleted.emit(event.params.data.id);
+            self.deleted.emit(+event.params.data.id);
         });
     }
 }

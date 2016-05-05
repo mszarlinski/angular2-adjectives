@@ -12,11 +12,17 @@
             </select>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-2"></div>
-        <div class="col-xs-2">
-            <div score-table [score]="score" [scales]="scales"></div>
-        </div>
-        <div class="col-xs-8"></div>
+    <div class="row" style="height: 100px">
+        <!-- spacer -->
     </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <score-table [score]="score"></score-table>
+        </div>
+        <div class="col-xs-2"></div>
+    </div>
+    <hr>
+    <span class="pull-right">
+        Created by <em>mszarlinski</em>
+    </span>
 </div>

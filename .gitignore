@@ -37,5 +37,5 @@ node_modules
 .idea
 
 # Compiled JS files
-app/*.js
-app/*.js.map
+app/**/*.js
+app/**/*.js.map

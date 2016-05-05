@@ -1,15 +1,16 @@
 import {Component} from 'angular2/core';
 import {Adjective} from './domain/adjective';
 import {Score} from './domain/score'
-import {ScoringService} from './service/scoring.service.ts';
-import {AdjectivesService} from './service/adjectives.service.ts';
+import {ScoringService} from './service/scoring.service';
+import {AdjectivesService} from './service/adjectives.service';
 import {Select2} from './select2.directive';
+import {ScoreTableComponent} from './scoretable.component';
 
 @Component({
     selector: 'adjectives-app',
     templateUrl: 'app/template/home.html',
     providers: [ScoringService, AdjectivesService],
-    directives: [Select2]
+    directives: [Select2, ScoreTableComponent]
 })
 export class AppComponent {
 

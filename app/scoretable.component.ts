@@ -6,5 +6,6 @@ import {Score} from './domain/score';
     templateUrl: 'app/template/scoretable.html'
 })
 export class ScoreTableComponent {
-    @Input public score:Score;
+    
+    @Input() public score:Score;
 }
