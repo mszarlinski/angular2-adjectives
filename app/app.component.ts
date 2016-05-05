@@ -25,7 +25,8 @@ export class AppComponent {
         this._adjectivesService.getAdjectives()
             .subscribe(data => this.adjectives = data);
 
-        this.score = this._scoringService.getInitScore();
+        this._scoringService.getInitScore()
+            .subscribe(score => this.score = score);
     }
 
     itemSelected(adjectiveId:number) {

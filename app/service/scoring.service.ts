@@ -2,22 +2,26 @@ import {Injectable} from "angular2/core";
 import {Http} from "angular2/http";
 import {Scale} from "./../domain/scale";
 import {Score} from "./../domain/score";
+import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class ScoringService {
     private _score:Score;
     private _scales:Array<Scale>;
+    
+    private _scalesObservable;
 
     constructor(private http:Http) {
-        http.get('app/config/scales.json')
-            .subscribe(config => {
+        this._scalesObservable = http.get('app/config/scales.json');
+
+        this._scalesObservable.subscribe(config => {
                 this._scales = config.json().scales;
                 this._score = new Score(this._scales);
             });
     }
-    
-    getInitScore():Score {
-        return this._score;
+
+    getInitScore():Observable<Score> {
+        return this._scalesObservable.map(config => new Score(config.json().scales));
     }
 
     addPointsForAdjective(adjectiveId:number):Score {
