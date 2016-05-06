@@ -1,4 +1,4 @@
 export interface Adjective {
-    id:number,
+    id:number;
     name:string;
 }

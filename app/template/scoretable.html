@@ -3,6 +3,7 @@
     <div class="panel-body" *ngIf="score">
         <table class="table">
             <tr *ngFor="#scale of score.scaleIds">
+                <td><strong>{{ scale }}</strong></td>
                 <td>{{ score.scaleNames[scale] }}</td>
                 <td><strong>{{ score.scalePoints[scale] }}</strong></td>
             </tr>
