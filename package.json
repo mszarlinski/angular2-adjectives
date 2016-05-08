@@ -19,7 +19,7 @@
     "zone.js": "0.6.10",
 
     "jquery": "^2.2.0",
-    "select2": "^4.0.1",
+    "select2": "^3.5.1",
     "bootstrap": "^3.3.6"
   },
   "devDependencies": {

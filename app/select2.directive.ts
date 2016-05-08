@@ -20,12 +20,26 @@ export class Select2 {
         let self = this;
 
         $(this.el.nativeElement).select2({
-            placeholder: this.placeholder
-        }).on('select2:select', function (event:any) {
-            self.selected.emit(+event.params.data.id);
-        }).on('select2:unselect', function (event:any) {
-            self.deleted.emit(+event.params.data.id);
+            placeholder: this.placeholder,
+            matcher: (chars, label, item) => Select2.matcher(chars, item.context)
+        }).on('change', (event:any) => {
+            if (event.added) {
+                self.selected.emit(+event.added.id);
+            } else if (event.removed) {
+                self.deleted.emit(+event.removed.id);
+            }
         });
+
+        // ======== select2#4.0.0 version ========
+        //    }).on('select2:select', function (event:any) {
+        //    self.selected.emit(+event.params.data.id);
+        //}).on('select2:unselect', function (event:any) {
+        //    self.deleted.emit(+event.params.data.id);
+        //});
+    }
+
+    static matcher(chars, itemContext):boolean {
+        return chars && itemContext.label.indexOf(chars) != -1 || (itemContext.index + 1) == chars;
     }
 }
 
