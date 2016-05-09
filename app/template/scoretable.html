@@ -8,6 +8,7 @@
                 <td><strong>{{ score.scalePoints[scale] }}</strong></td>
             </tr>
         </table>
-        <button type="button" class="btn btn-primary" (click)="saveReport()">Save report</button>
+        <button type="button" class="btn btn-success" (click)="exportToCsv()">Export to CSV</button>
+        <button type="button" class="btn btn-primary" (click)="exportToTxt()">Export to TXT</button>
     </div>
 </div>
