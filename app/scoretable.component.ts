@@ -15,15 +15,24 @@ export class ScoreTableComponent {
     }
 
     exportToCsv():void {
-        var blob:Blob = this._scoreExportService.createBlobCsv(this.score);
-        var filename:string = ScoreTableComponent.generateFileName('.csv');
-        this.doExport(blob, filename);
+        this.exportTemplate(this._scoreExportService.createBlobCsv, '.csv');
     }
 
     exportToTxt():void {
-        var blob:Blob = this._scoreExportService.createBlobTxt(this.score);
-        var filename:string = ScoreTableComponent.generateFileName('.txt');
-        this.doExport(blob, filename);
+        this.exportTemplate(this._scoreExportService.createBlobTxt, '.txt');
+    }
+
+    private exportTemplate(blobFactoryFun:(s:Score)=>Blob, fileExt:string):void {
+        let userName:string = this.askForUserName();
+        if (userName) {
+            let blob:Blob = blobFactoryFun.bind(this._scoreExportService)(this.score);
+            let filename:string = ScoreTableComponent.generateFileName(userName, fileExt);
+            this.doExport(blob, filename);
+        }
+    }
+
+    private askForUserName():string {
+        return prompt('Podaj imię i nazwisko', 'Jan Kowalski');
     }
 
     private doExport(blob:Blob, filename:string) {
@@ -32,9 +41,9 @@ export class ScoreTableComponent {
             navigator.msSaveBlob(blob, filename)
         } else {
             // crete link and click it
-            var link:HTMLAnchorElement = document.createElement('a');
+            let link:HTMLAnchorElement = document.createElement('a');
             if (ScoreTableComponent.html5DownloadEnabled(link)) {
-                var url:string = URL.createObjectURL(blob);
+                let url:string = URL.createObjectURL(blob);
                 link.setAttribute('href', url);
                 link.setAttribute('download', filename);
                 link.style.visibility = 'hidden';
@@ -49,14 +58,16 @@ export class ScoreTableComponent {
         return link.hasOwnProperty('download') !== undefined; // download property is missing in d.ts file
     }
 
-    private static generateFileName(fileExt:string) {
-        var date:Date = new Date();
-        var yyyy:string = date.getFullYear().toString();
-        var MM:string = (date.getMonth() + 1).toString();
-        var dd:string = date.getDate().toString();
-        var hh:string = date.getHours().toString();
-        var mm:string = date.getMinutes().toString();
-        var suffix:string = yyyy + (MM[1] ? MM : "0" + MM[0]) + (dd[1] ? dd : "0" + dd[0]) + '_' + (hh[1] ? hh : "0" + hh[0]) + (mm[1] ? mm : "0" + mm[0]);
-        return 'Wyniki_' + suffix + fileExt;
+    private static generateFileName(userName:string, fileExt:string) {
+        let date:Date = new Date();
+        let yyyy:string = date.getFullYear().toString();
+        let MM:string = (date.getMonth() + 1).toString();
+        let dd:string = date.getDate().toString();
+        let hh:string = date.getHours().toString();
+        let mm:string = date.getMinutes().toString();
+        let suffix:string = yyyy + (MM[1] ? MM : "0" + MM[0]) + (dd[1] ? dd : "0" + dd[0]) + '_' + (hh[1] ? hh : "0" + hh[0]) + (mm[1] ? mm : "0" + mm[0]);
+        let userData:string = userName.replace(' ', '_');
+        
+        return 'Wyniki_' + userData + '_' + suffix + fileExt;
     }
 }
